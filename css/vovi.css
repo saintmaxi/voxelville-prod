@@ -1,0 +1,555 @@
+:root {
+  --active-color: rgb(204, 200, 200);
+  --text-color: white;
+}
+
+#vovi-description {
+  margin: auto;
+  text-align: center;
+  font-family: "Pixel";
+  width: 65%;
+  font-size: 1.4vw !important;
+  line-height: 1.6vw !important;
+}
+
+h2,
+h3 {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+h3 {
+  font-size: 1.2vw !important;
+  line-height: 1.2vw !important;
+}
+
+/* Staking Popup Stuff */
+
+#stake-popup {
+  min-height: 40vh;
+  max-height: 80vh;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  border-radius: 40px;
+}
+
+#stake-popup * {
+  color: black !important;
+}
+
+.arrow {
+  width: 30%;
+}
+
+#inner-wrapper {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+#inner-wrapper #close {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  width: 3%;
+}
+
+#inner-wrapper #close:hover path {
+  fill: var(--active-color);
+  cursor: pointer;
+}
+
+#staking-row-wrapper {
+  text-align: center;
+  max-height: 64vh;
+  overflow-y: scroll;
+  border-top: solid 1px black;
+  border-bottom: solid 1px black;
+}
+
+#button-wrapper {
+  height: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+#button-wrapper button {
+  width: 70%;
+  background-color: black;
+  color: white !important;
+}
+
+#button-wrapper button:hover {
+  background-color: rgb(111, 78, 222);
+}
+
+.staking-row {
+  margin-top: 2vw !important;
+  margin-bottom: 2vw !important;
+  width: 65%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.staking-plot,
+.staking-avatar {
+  width: 33%;
+}
+
+.staking-plot img,
+.staking-avatar img,
+.staking-plot select,
+.staking-avatar select {
+  border: solid black 0.2vw;
+  border-radius: 40px;
+}
+
+.staking-plot p,
+.staking-avatar select {
+  padding: 0 !important;
+  margin-top: 10px !important;
+}
+
+.staking-avatar select {
+  text-align: center;
+  font-size: 1.4vw !important;
+  line-height: 1.6vw !important;
+  width: 100%;
+}
+
+/* End staking popup stuff */
+
+#vovi-balances {
+  text-align: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.vovi-balance-container {
+  padding: 20px;
+  margin-bottom: 10px;
+  width: 39vw;
+}
+
+.vovi-balance-container button {
+  min-width: 60%;
+}
+
+#your-vovi-container {
+  margin-right: 2vw;
+}
+
+#your-asset-section {
+  width: 80vw;
+  margin: auto;
+  text-align: center;
+  min-height: 40vh;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.staking-section {
+  width: 90%;
+}
+
+#available-assets-images,
+#staked-assets-images {
+  /* border: solid black .5vw; */
+  /* border-radius: 20px; */
+  /* height: 50vh; */
+  overflow-y: scroll;
+  text-align: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.your-asset {
+  width: 33%;
+  margin: 10px;
+  transition: transform ease 300ms;
+}
+
+.your-asset img {
+  border: solid white 0.2vw;
+  border-radius: 20px;
+  margin: 5px;
+  background-color: black;
+}
+
+.your-asset .vovi-icon {
+  border: none;
+  width: 1.5vw;
+  margin: 0;
+  background-color: transparent;
+}
+
+.your-asset .vovi-icon:hover {
+  border: none;
+}
+
+.asset-id,
+.vovi-earned {
+  color: var(--text-color);
+  margin-bottom: 0px;
+  padding: 0 !important;
+  text-align: center;
+}
+
+.your-asset:hover {
+  transform: translate(0, -5px);
+  cursor: pointer;
+}
+
+.your-asset:hover .asset-id,
+.your-asset:hover .vovi-earned {
+  color: black !important;
+}
+
+.your-asset:hover img {
+  border-color: black;
+  cursor: pointer;
+}
+
+.your-asset .vovi-icon {
+  margin-bottom: 0.2vw;
+  margin-left: 0.2vw;
+}
+
+.active img {
+  border-color: black;
+}
+
+.active img,
+.active p {
+  border-color: black;
+  color: black !important;
+}
+
+.asset-id {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.one {
+  opacity: 0;
+  -webkit-animation: dot 1.3s infinite;
+  -webkit-animation-delay: 0s;
+  animation: dot 1.3s infinite;
+  animation-delay: 0s;
+}
+
+.two {
+  opacity: 0;
+  -webkit-animation: dot 1.3s infinite;
+  -webkit-animation-delay: 0.2s;
+  animation: dot 1.3s infinite;
+  animation-delay: 0.2s;
+}
+
+.three {
+  opacity: 0;
+  -webkit-animation: dot 1.3s infinite;
+  -webkit-animation-delay: 0.3s;
+  animation: dot 1.3s infinite;
+  animation-delay: 0.3s;
+}
+
+@-webkit-keyframes dot {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes dot {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.stake-buttons button {
+  width: 25%;
+}
+
+@media screen and (max-width: 991px) {
+  /* Staking Popup Stuff */
+
+  #stake-popup {
+    height: 95vh;
+    width: 95vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    border-radius: 20px;
+  }
+
+  #inner-wrapper {
+    height: 100%;
+    width: 100%;
+  }
+
+  #inner-wrapper #close {
+    width: 10%;
+  }
+
+  .arrow {
+    width: 20%;
+  }
+
+  #staking-row-wrapper {
+    text-align: center;
+    height: 75%;
+    overflow-y: scroll;
+    border-top: solid 1px black;
+    border-bottom: solid 1px black;
+  }
+
+  .staking-plot img,
+  .staking-avatar img,
+  .staking-plot select,
+  .staking-avatar select {
+    border: solid black 1px;
+    border-radius: 20px;
+  }
+
+  #button-wrapper {
+    height: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #button-wrapper button {
+    width: 50%;
+    min-height: 7vh;
+  }
+
+  .staking-row {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+    width: 95%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .staking-plot,
+  .staking-avatar {
+    width: 35%;
+  }
+
+  .staking-plot p,
+  .staking-avatar select {
+    padding: 0 !important;
+    margin-top: 5px !important;
+    font-size: 3vh !important;
+    line-height: 3vh !important;
+  }
+
+  .staking-avatar select {
+    text-align: center;
+    font-size: 3vh !important;
+    line-height: 3vh !important;
+    width: 100%;
+  }
+
+  /* End staking popup stuff */
+
+  #vovi-description {
+    margin: auto;
+    text-align: center;
+    width: 95%;
+    font-size: 2.5vh !important;
+    line-height: 2.9vh !important;
+  }
+
+  h2 {
+    font-size: 3.2vh !important;
+    line-height: 3.2vh !important;
+  }
+
+  h3 {
+    font-size: 2.8vh !important;
+    line-height: 2.8vh !important;
+  }
+
+  .vovi-balance-container {
+    width: 95vw;
+  }
+
+  .vovi-balance-container h2 {
+    font-size: 3.2vh;
+    line-height: 3.2vh !important;
+  }
+
+  .vovi-balance-container button {
+    width: 95%;
+    font-size: 2.5vh;
+    padding: 20px;
+  }
+
+  #your-vovi-container {
+    margin-right: initial;
+  }
+
+  #your-vovi,
+  #claimable-vovi {
+    font-size: 5vh;
+    line-height: 5vh;
+  }
+
+  .vovi-balance-container .vovi-icon {
+    width: 5vh;
+  }
+
+  #your-asset-section {
+    width: 95vw;
+    min-height: 0;
+    margin: auto;
+    display: block;
+  }
+
+  .stake-buttons button {
+    margin: 5px;
+    width: 95%;
+  }
+
+  .staking-section {
+    width: 95%;
+    margin: 2.5%;
+  }
+
+  .asset-wrapper {
+    margin-top: 30px;
+  }
+
+  #available-assets-images,
+  #staked-assets-images {
+    width: 100%;
+    /* border-width: 5px; */
+    height: 60vh;
+    text-align: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .box3 {
+    padding: 20px;
+  }
+
+  .your-asset {
+    width: 41%;
+  }
+
+  .your-asset img {
+    border-width: 4px;
+  }
+
+  .your-asset .vovi-icon {
+    border: none;
+    width: 3vh;
+    margin: 0;
+    margin-bottom: 2px;
+    margin-left: 4px;
+  }
+
+  .asset-id,
+  .vovi-earned {
+    font-size: 2.4vh !important;
+    line-height: 2.8vh !important;
+  }
+
+  .active img {
+    border: solid 4px black;
+  }
+
+  .your-asset:hover img {
+    border: solid 4px black;
+    cursor: pointer;
+  }
+
+  .your-asset:hover .vovi-icon {
+    border: none;
+  }
+}
