@@ -690,6 +690,7 @@ h5 {
 
 @media screen and (max-width: 991px) {
   #dark-mode-toggle-mobile {
+    touch-action: manipulation;
     position: absolute;
     bottom: 10px;
     right: 5px;
