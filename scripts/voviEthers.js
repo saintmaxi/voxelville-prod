@@ -57,6 +57,15 @@ const REQUEST_SLEEP = 1000;
 
 /*********************************END CONFIG************************************/
 
+if (!localStorage.getItem("hasVisited")) {
+    await displayStatusMessage(`Welcome to the $VOVI staking platform! 
+                                Since this looks like your first visit, 
+                                we recommend visiting the 
+                                <a class="link" href="./faq.html">FAQ</a> page. 
+                                Please reach out in the  <a class="link" href="https://discord.gg/voxelville">Discord</a> as well for any assistance. Enjoy!`);
+    localStorage.setItem("hasVisited", "true");
+}
+
 if (window.ethereum == undefined) {
     displayErrorMessage('Use a web3 enabled browser to stake!');
     $("#available-assets-images").empty();
@@ -852,15 +861,6 @@ ethereum.on("accountsChanged", async (accounts_) => {
 
 window.onload = async () => {
     await updateInfo();
-    let links = await getWalletLinks();
-    if (!localStorage.getItem("hasVisited")) {
-        await displayStatusMessage(`Welcome to the $VOVI staking platform! 
-                                    Since this looks like your first visit, 
-                                    we recommend visiting the 
-                                    <a class="link" href="./faq.html">FAQ</a> page. 
-                                    Please reach out in the  <a class="link" href="https://discord.gg/voxelville">Discord</a> as well for any assistance. Enjoy!`);
-        localStorage.setItem("hasVisited", "true");
-    }
     await addLinksOption();
     if (pendingTransactions.size < 1) {
         await updateClaimingInfo();
