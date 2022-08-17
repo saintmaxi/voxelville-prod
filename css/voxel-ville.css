@@ -18,6 +18,19 @@
   src: url("../css/Ubuntu-Medium.ttf");
 }
 
+#dark-mode-toggle {
+  width: 2vw;
+  position: absolute;
+  top: 0.5vw;
+  left: 0.5vw;
+  transition: all 0.2s;
+}
+
+#dark-mode-toggle:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
 :root {
   --active-color: rgb(204, 200, 200);
   --text-color: white;
@@ -512,10 +525,12 @@ h5 {
   border: solid 2px black;
   padding-top: 5px;
   padding-bottom: 5px;
+  border-radius: 25px;
 }
 
 .label-input {
   width: 90% !important;
+  /* border-radius: 25px; */
 }
 
 #new-links,
@@ -578,11 +593,13 @@ h5 {
 }
 
 #discord-popup #content button:hover {
-  background-color: rgb(111, 78, 222);
+  background-color: rgb(111, 78, 222) !important;
+  color: white !important;
 }
 
 #discord-popup #content button.active {
-  background-color: rgb(111, 78, 222);
+  background-color: rgb(111, 78, 222) !important;
+  color: white !important;
 }
 
 #discord-popup #content button {
@@ -672,6 +689,13 @@ h5 {
 }
 
 @media screen and (max-width: 991px) {
+  #dark-mode-toggle-mobile {
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    width: 10%;
+  }
+
   .coco-icon {
     display: inline;
     width: 2.8vh;

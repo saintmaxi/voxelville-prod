@@ -312,6 +312,7 @@ input {
   #mobile-nav-menu {
     margin-top: -100%;
     transition: all 0.4s;
+    position: relative;
     /* background-color: #447CFC; */
   }
 
@@ -397,8 +398,8 @@ input {
   #navbar {
     touch-action: manipulation;
     width: 10%;
-    background-color: white;
-    background-image: url("../images/burger.png");
+    background-color: transparent;
+    background-image: url("../images/burger-black.png");
     background-size: 100% 100%;
   }
 

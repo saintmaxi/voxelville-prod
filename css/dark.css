@@ -1,0 +1,70 @@
+.body.dark {
+  background-color: #151516 !important;
+}
+
+.header-menu a.dark {
+  color: white;
+}
+
+.title-link.dark {
+  color: white;
+}
+
+#roadmap.dark {
+  color: white !important;
+}
+
+#navbar.dark {
+  background-image: url("../images/burger-white.png");
+}
+
+#stake-popup.dark,
+#error-popup.dark,
+#status-popup.dark,
+#discord-popup.dark {
+  background-color: #151516;
+  border-color: white;
+}
+
+#stake-popup.dark p,
+#error-popup.dark p,
+#status-popup.dark p,
+#discord-popup.dark p {
+  color: white !important;
+}
+
+#stake-popup.dark h1 {
+  color: white !important;
+}
+
+#stake-popup.dark .staking-plot img,
+#stake-popup.dark .staking-avatar img {
+  border-color: white;
+}
+
+#stake-popup.dark #staking-row-wrapper {
+  border-color: white;
+}
+
+#stake-popup.dark button,
+#error-popup.dark #content button,
+#status-popup.dark #content button,
+#discord-popup.dark #content button {
+  color: black !important;
+  background-color: white;
+}
+
+#discord-popup.dark .popup-wrapper #content #current-links,
+#discord-popup.dark .popup-wrapper #content #new-links {
+  border-color: white;
+}
+
+#error-popup.dark .popup-wrapper #close,
+#status-popup.dark .popup-wrapper #close,
+#discord-popup.dark .popup-wrapper #close {
+  fill: white;
+}
+
+#discord-popup.dark .popup-wrapper #content .link-entry:nth-child(1) {
+  color: white;
+}

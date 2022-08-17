@@ -87,7 +87,8 @@ h3 {
 }
 
 #button-wrapper button:hover {
-  background-color: rgb(111, 78, 222);
+  background-color: rgb(111, 78, 222) !important;
+  color: white !important;
 }
 
 .staking-row {
@@ -334,7 +335,7 @@ h3 {
   /* Staking Popup Stuff */
 
   #stake-popup {
-    height: 95vh;
+    height: 98vh;
     width: 95vw;
     display: flex;
     flex-direction: column;
