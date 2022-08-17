@@ -5,17 +5,17 @@
 
 @font-face {
   font-family: "Korto";
-  src: URL("../css/roboto.regular.ttf") format("truetype");
+  src: URL("../css/Ubuntu-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Korto Ultra";
-  src: URL("../css/roboto.regular.ttf") format("truetype");
+  src: URL("../css/Ubuntu-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Roboto Medium";
-  src: url("../css/Roboto-Medium.ttf");
+  src: url("../css/Ubuntu-Medium.ttf");
 }
 
 :root {
