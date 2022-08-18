@@ -36,7 +36,6 @@ function applyDarkMode(turnOn) {
         $("#navbar").addClass("dark");
         $(".header-menu a").addClass("dark");
         $(".title-link").addClass("dark");
-        $(".text-primary").addClass("dark");
     }
     else {
         $("#dark-mode-toggle").attr("src", "/images/moon-solid.svg");
@@ -51,7 +50,6 @@ function applyDarkMode(turnOn) {
         $("#navbar").removeClass("dark");
         $(".header-menu a").removeClass("dark");
         $(".title-link").removeClass("dark");
-        $(".text-primary").removeClass("dark");
     }
 }
 
