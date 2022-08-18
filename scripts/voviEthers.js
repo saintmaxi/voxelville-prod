@@ -169,7 +169,8 @@ const getAllPlotsOwned = async () => {
         }
     }
 
-    stakedPlots = (await vovi.stakedPlotsOf(links)).sort((a, b) => a - b).map(Number);
+    stakedPlots = (await vovi.stakedPlotsOf(links))
+    stakedPlots = [...stakedPlots].sort((a, b) => a - b).map(Number);
     unstakedPlots = (ownedPlotIDs.filter(item => !stakedPlots.includes(item))).sort((a, b) => a - b);
 
     for (plot of stakedPlots) {
@@ -423,46 +424,46 @@ const openStakingPrompt = async () => {
             let avatarOptsJSX = "";
             for (avatar of unstakedAvatars) {
                 avatarOptsJSX += `<option value="${avatar}">
-                                        #${avatar}
-                                    </option>`;
+                                            #${avatar}
+                                        </option>`;
             }
             const plotArray = Array.from(selectedForStaking).sort((a, b) => a - b);
             for (plot of plotArray) {
                 let rowJSX = `<div class="staking-row">
-                                <div class="staking-plot">
-                                    <img class="staking-plot-img" src="${plotIDtoURL.get(plot)}">
-                                    <p>Plot #${plot}</p>
-                                </div>
-                                <img class="arrow" src="./images/double-arrow-${darkMode ? "white" : "black"}.png">
-                                <div class="staking-avatar" id="staking-avatar-${plot}">
-                                    <img class="staking-avatar-img" id="avatar-plot-${plot}" src="./images/hidden.png">
-                                    <select class="staking-avatar-selection" onchange="setProposedStakedAvatar(${plot}, this.value)">
-                                        <option value="0">
-                                            None
-                                        </option>
-                                        ${avatarOptsJSX}
-                                    </select>
-                                </div>
-                            </div>`;
+                                    <div class="staking-plot">
+                                        <img class="staking-plot-img" src="${plotIDtoURL.get(plot)}">
+                                        <p>Plot #${plot}</p>
+                                    </div>
+                                    <img class="arrow" src="./images/double-arrow-${darkMode ? "white" : "black"}.png">
+                                    <div class="staking-avatar" id="staking-avatar-${plot}">
+                                        <img class="staking-avatar-img" id="avatar-plot-${plot}" src="./images/hidden.png">
+                                        <select class="staking-avatar-selection" onchange="setProposedStakedAvatar(${plot}, this.value)">
+                                            <option value="0">
+                                                None
+                                            </option>
+                                            ${avatarOptsJSX}
+                                        </select>
+                                    </div>
+                                </div>`;
                 selectionJSX += rowJSX;
             }
             let fakeJSX = `<div id="stake-popup" class="${darkMode}">
-                            <div id="inner-wrapper">
-                                <svg id="close" onclick="$('#block-screen-stake').remove();$('#stake-popup').remove();proposedStakedPlotsToAvatars = new Map()" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 512 512">
-                                    <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-                                    <path fill="${darkMode ? "white" : "black"}"
-                                    d="M0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256zM175 208.1L222.1 255.1L175 303C165.7 312.4 165.7 327.6 175 336.1C184.4 346.3 199.6 346.3 208.1 336.1L255.1 289.9L303 336.1C312.4 346.3 327.6 346.3 336.1 336.1C346.3 327.6 346.3 312.4 336.1 303L289.9 255.1L336.1 208.1C346.3 199.6 346.3 184.4 336.1 175C327.6 165.7 312.4 165.7 303 175L255.1 222.1L208.1 175C199.6 165.7 184.4 165.7 175 175C165.7 184.4 165.7 199.6 175 208.1V208.1z" />
-                                </svg>
-                                <h1>Select avatars to stake with plots.</h1>
-                                <div id="staking-row-wrapper">
-                                    ${selectionJSX}
+                                <div id="inner-wrapper">
+                                    <svg id="close" onclick="$('#block-screen-stake').remove();$('#stake-popup').remove();proposedStakedPlotsToAvatars = new Map()" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512">
+                                        <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                                        <path fill="${darkMode ? "white" : "black"}"
+                                        d="M0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256zM175 208.1L222.1 255.1L175 303C165.7 312.4 165.7 327.6 175 336.1C184.4 346.3 199.6 346.3 208.1 336.1L255.1 289.9L303 336.1C312.4 346.3 327.6 346.3 336.1 336.1C346.3 327.6 346.3 312.4 336.1 303L289.9 255.1L336.1 208.1C346.3 199.6 346.3 184.4 336.1 175C327.6 165.7 312.4 165.7 303 175L255.1 222.1L208.1 175C199.6 165.7 184.4 165.7 175 175C165.7 184.4 165.7 199.6 175 208.1V208.1z" />
+                                    </svg>
+                                    <h1>Select avatars to stake with plots.</h1>
+                                    <div id="staking-row-wrapper">
+                                        ${selectionJSX}
+                                    </div>
+                                    <div id="button-wrapper">
+                                        <button class="button" onclick="stakeByIds()">STAKE</button>
+                                    </div>
                                 </div>
-                                <div id="button-wrapper">
-                                    <button class="button" onclick="stakeByIds()">STAKE</button>
-                                </div>
-                            </div>
-                    </div>`;
+                        </div>`;
             $("body").append(fakeJSX);
             let height = $(document).height();
             $("body").append(`<div id='block-screen-stake' style="height:${height}px" onclick="$('#stake-popup').remove();$('#block-screen-stake').remove();proposedStakedPlotsToAvatars = new Map()"></div>`);
@@ -855,10 +856,10 @@ window.onload = async () => {
     await updateInfo();
     if (!localStorage.getItem("hasVisited")) {
         await displayStatusMessage(`Welcome to the $VOVI staking platform! 
-                                    Since this looks like your first visit, 
-                                    we recommend visiting the 
-                                    <a class="link" href="./faq.html">FAQ</a> page. 
-                                    Please reach out in the  <a class="link" href="https://discord.gg/voxelville">Discord</a> as well for any assistance. Enjoy!`);
+                                        Since this looks like your first visit, 
+                                        we recommend visiting the 
+                                        <a class="link" href="./faq.html">FAQ</a> page. 
+                                        Please reach out in the  <a class="link" href="https://discord.gg/voxelville">Discord</a> as well for any assistance. Enjoy!`);
         localStorage.setItem("hasVisited", "true");
     }
     await addLinksOption();
