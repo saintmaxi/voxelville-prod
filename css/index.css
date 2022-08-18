@@ -61,7 +61,7 @@
 
 .header-menu a {
   color: black;
-  font-family: "Roboto Medium";
+  font-family: "Poppins Medium", sans-serif;
 }
 
 a.active {
@@ -157,7 +157,7 @@ a:hover {
 
 .left-number,
 .right-number {
-  font-family: "Roboto Medium";
+  font-family: "Poppins Medium", sans-serif;
   position: absolute;
   text-align: center;
   top: 20px;

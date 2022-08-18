@@ -4,18 +4,13 @@
 }
 
 @font-face {
-  font-family: "Korto";
-  src: URL("../css/Ubuntu-Regular.ttf") format("truetype");
+  font-family: "Poppins";
+  src: URL("../css/Poppins-Regular.otf") format("truetype");
 }
 
 @font-face {
-  font-family: "Korto Ultra";
-  src: URL("../css/Ubuntu-Regular.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "Roboto Medium";
-  src: url("../css/Ubuntu-Medium.ttf");
+  font-family: "Poppins Medium";
+  src: url("../css/Poppins-Medium.otf");
 }
 
 #dark-mode-toggle {
@@ -47,7 +42,7 @@
 
 .right-number,
 .left-number {
-  font-family: "Korto Ultra";
+  font-family: "Poppins Medium", sans-serif;
 }
 
 .link.active {
@@ -58,7 +53,7 @@
 html,
 body {
   overscroll-behavior: none;
-  font-family: "Korto", sans-serif;
+  font-family: "Poppins", sans-serif;
   margin: 0;
   width: 100%;
   height: 100%;
@@ -73,7 +68,7 @@ body {
 }
 
 .coco-balance-float {
-  font-family: "Korto Ultra";
+  font-family: "Poppins", sans-serif;
   position: fixed;
   right: 30px;
   bottom: 30px;
@@ -132,12 +127,12 @@ body {
 
 h1,
 h2 {
-  font-family: "Korto Ultra";
+  font-family: "Poppins Medium", sans-serif;
   letter-spacing: 1px;
 }
 
 .text-primary {
-  font-family: "Roboto Medium";
+  font-family: "Poppins Medium", sans-serif;
   color: black;
 }
 
@@ -148,7 +143,7 @@ h1 {
 }
 
 p {
-  font-family: "Korto";
+  font-family: "Poppins", sans-serif;
   text-align: left;
   font-weight: bold;
   font-size: 1.2vw !important;
@@ -245,7 +240,7 @@ p {
 
 .body {
   /* background-color: white; */
-  font-family: "Korto", sans-serif;
+  font-family: "Poppins", sans-serif;
   background-size: auto;
   background-repeat: repeat;
   color: white;
@@ -312,7 +307,7 @@ p {
   line-height: 1.5vw;
   padding: 0.3vw;
   border-radius: 25px;
-  font-family: "Roboto Medium";
+  font-family: "Poppins Medium", sans-serif;
   transition: all 0.2s;
 }
 
@@ -580,7 +575,7 @@ h5 {
 #confirm-popup #content input {
   text-align: center;
   /* border: solid black 1px; */
-  font-family: "Korto";
+  font-family: "Poppins", sans-serif;
   width: 70%;
 }
 
