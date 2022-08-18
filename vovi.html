@@ -147,13 +147,6 @@
          </div>
       </div>
    </div>
-   <div id="approval-container" class="section body-section body-1 wf-section hidden">
-      <div id="approval" class="container w-container box" style="text-align: center;">
-         <h1>APPROVE STAKING</h1>
-         <h3>In order to stake, you must first approve the staking contract to transfer your Wave Catchers.</h3>
-         <button class="button" id="approval-button" onclick="approveWCToCocoV2()">APPROVE STAKING</button>
-      </div>
-   </div>
    <div class="section">
       <div id="vovi-balances">
          <div id="your-vovi-container" class="box vovi-balance-container">
@@ -166,7 +159,11 @@
             <h2 class="text-primary">CLAIMABLE $VOVI</h2>
             <h2><span id="claimable-vovi"><span class="one">.</span><span class="two">.</span><span
                      class="three">.</span></span> <img src="images/coin.png" class="coco-icon"></h2>
-            <button class="button" onclick="claimAll()">CLAIM $VOVI </button>
+            <div id="claim-buttons">
+               <button class="button" onclick="claimAll()">CLAIM $VOVI</button>
+               <button class="button" onmouseover="this.innerHTML='COMING SOON...'"
+                  onmouseleave="this.innerHTML='SHOP WITH $VOVI'">SHOP WITH $VOVI</button>
+            </div>
          </div>
       </div>
    </div>

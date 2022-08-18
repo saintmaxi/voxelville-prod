@@ -10,6 +10,10 @@
   color: white;
 }
 
+.text-primary.dark {
+  color: white;
+}
+
 #roadmap.dark {
   color: white !important;
 }

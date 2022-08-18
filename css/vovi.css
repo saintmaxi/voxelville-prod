@@ -154,6 +154,27 @@ h3 {
   align-items: center;
 }
 
+#claim-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#claim-buttons button {
+  min-width: initial;
+  min-width: 40%;
+  margin-left: 0.5%;
+}
+
+#claim-buttons button:nth-child(2) {
+  background-color: var(--active-color);
+}
+
+#claim-buttons button:nth-child(2):hover {
+  cursor: default;
+}
+
 .vovi-balance-container {
   padding: 20px;
   margin-bottom: 10px;
@@ -213,7 +234,7 @@ h3 {
 }
 
 .your-asset {
-  width: 33%;
+  width: 25%;
   margin: 10px;
   transition: transform ease 300ms;
 }
@@ -332,6 +353,16 @@ h3 {
 }
 
 @media screen and (max-width: 991px) {
+  #claim-buttons {
+    display: initial;
+  }
+
+  #claim-buttons button {
+    min-width: initial;
+    width: 95%;
+    margin-bottom: 3%;
+  }
+
   /* Staking Popup Stuff */
 
   #stake-popup {
