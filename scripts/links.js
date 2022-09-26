@@ -3,10 +3,11 @@ let walletToSignedMessage = new Map();
 
 const addLinksOption = async () => {
     let userAddress = await signer.getAddress();
+    let darkMode = checkDarkModeOn() ? "dark" : "";
     if (!connectedWallets.has(userAddress)) {
         connectedWallets.add(userAddress);
         if ($("#discord-popup").length) {
-            $("#new-links").append(`<div class="link-entry">
+            $("#new-links").append(`<div class="link-entry ${darkMode}">
             <div>
                 ${userAddress.substr(0, 7)}..
             </div>

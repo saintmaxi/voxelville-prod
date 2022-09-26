@@ -72,3 +72,7 @@
 #discord-popup.dark .link-entry input {
   color: black !important;
 }
+
+.link-entry.dark div {
+  color: white;
+}
