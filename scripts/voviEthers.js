@@ -671,8 +671,8 @@ const getAssetImages = async () => {
                 active = "active";
             }
 
-            // ~6450 blocks per day * per block rewards rate
-            let earnRate = 6450 * (await getRewardsForId("voxelVille", plotID, false));
+            // ~7200 blocks per day * per block rewards rate
+            let earnRate = 7200 * (await getRewardsForId("voxelVille", plotID, false));
 
             batchFakeJSX += `<div id="asset-${plotID}" class="your-asset ${active}"><img src="${plotIDtoURL.get(plotID)}" onclick="selectForStaking(${plotID})"><p class="asset-id">Plot #${plotID}</p><p class="vovi-earned"><span id="vovi-earned-${plotID}">~ ${earnRate}</span><img src="${voviImgURL}" class="vovi-icon">/day</p></div>`
 
