@@ -68,3 +68,7 @@
 #discord-popup.dark .popup-wrapper #content .link-entry:nth-child(1) {
   color: white;
 }
+
+#discord-popup.dark .link-entry input {
+  color: black !important;
+}
