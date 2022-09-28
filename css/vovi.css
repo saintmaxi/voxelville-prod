@@ -523,6 +523,7 @@ h3 {
 
   .bonus-label {
     bottom: 10%;
+    width: 85%;
   }
 
   .stake-buttons button {
