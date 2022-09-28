@@ -875,7 +875,6 @@ ethereum.on("accountsChanged", async (accounts_) => {
 });
 
 window.onload = async () => {
-    await updateInfo();
     if (!localStorage.getItem("hasVisited")) {
         await displayStatusMessage(`Welcome to the $VOVI staking platform! 
                                     Since this looks like your first visit, 
@@ -884,6 +883,7 @@ window.onload = async () => {
                                     Please reach out in the  <a class="link" href="https://discord.gg/voxelville">Discord</a> as well for any assistance. Enjoy!`);
         localStorage.setItem("hasVisited", "true");
     }
+    await updateInfo();
     await addLinksOption();
     if (pendingTransactions.size < 1) {
         await updateClaimingInfo();
