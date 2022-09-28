@@ -248,7 +248,8 @@ const getVoviBalance = async () => {
 const getRewardsForId = async (project, id, staked) => {
     let response = await fetch(`${voviAPIBase}/nfts/${project}/${id}`).then(res => res.json());
     if (!staked) {
-        let tokens = Number(Number(formatEther(response["tokens"])).toFixed(2));
+        // ~7200 blocks per day * per block rewards rat
+        let tokens = (Number(Number(formatEther(response["tokens"]))) * 7200).toFixed(2);
         return tokens;
     }
     else {
@@ -671,8 +672,7 @@ const getAssetImages = async () => {
                 active = "active";
             }
 
-            // ~7200 blocks per day * per block rewards rate
-            let earnRate = 7200 * (await getRewardsForId("voxelVille", plotID, false));
+            let earnRate = await getRewardsForId("voxelVille", plotID, false);
 
             batchFakeJSX += `<div id="asset-${plotID}" class="your-asset ${active}"><img src="${plotIDtoURL.get(plotID)}" onclick="selectForStaking(${plotID})"><p class="asset-id">Plot #${plotID}</p><p class="vovi-earned"><span id="vovi-earned-${plotID}">~ ${earnRate}</span><img src="${voviImgURL}" class="vovi-icon">/day</p></div>`
 
