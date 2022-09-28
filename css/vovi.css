@@ -246,6 +246,23 @@ h3 {
   background-color: black;
 }
 
+.asset-img-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.bonus-label {
+  border-radius: 20px;
+  position: absolute;
+  margin: auto;
+  width: 75%;
+  background-color: white;
+  color: black;
+  bottom: 8%;
+}
+
 .your-asset .vovi-icon {
   border: none;
   width: 1.5vw;
@@ -502,6 +519,10 @@ h3 {
     min-height: 0;
     margin: auto;
     display: block;
+  }
+
+  .bonus-label {
+    bottom: 10%;
   }
 
   .stake-buttons button {

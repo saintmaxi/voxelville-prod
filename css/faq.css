@@ -1,0 +1,16 @@
+.vovi-icon {
+    border: none;
+    width: 1.5vw;
+    margin: 0;
+    background-color: transparent;
+  }
+
+@media screen and (max-width: 991px) {
+    .vovi-icon {
+        border: none;
+        width: 3vh;
+        margin: 0;
+        margin-bottom: 2px;
+        margin-left: 4px;   
+    }
+}
