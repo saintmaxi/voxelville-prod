@@ -287,6 +287,7 @@ const getClaimRequests = async (plotIDs) => {
         const plotChunks = splitArrayToChunks(plotIDs, 1000);
         for (const plotChunk of plotChunks) {
             await Promise.all(plotChunk.map(async (id) => {
+                let plotID = Number(id);
 
         // for (plotID of plotIDs) {
             let rewardResponse = await fetch(`${voviAPIBase}/nfts/voxelVille/${plotID}`).then(res => res.json());
@@ -294,6 +295,7 @@ const getClaimRequests = async (plotIDs) => {
             let tokens = rewardResponse["tokens"];
             let coupon = rewardResponse["coupon"];
             let reward = [tokenID, tokens, coupon];
+            console.log("rewards response is", rewardResponse)
 
             let plotResponse = await fetch(`${voviAPIBase}/transactions/voxelVille?walletAddress=${userAddress}&tokenId=${plotID}`, options).then(res => res.json());
             while (jQuery.isEmptyObject(plotResponse)) {
@@ -387,10 +389,15 @@ const getStakeRequests = async (plotIDs) => {
         await displayStatusMessage(`Generating request<span class="one">.</span><span class="two">.</span><span class="three">.</span></span>`);
         let userAddress = await getAddress();
         let stakeRequests = [];
-        for (plotID of plotIDs) {
+        const plotChunks = splitArrayToChunks(plotIDs, 1000);
+        for (const plotChunk of plotChunks) {
+            await Promise.all(plotChunk.map(async (id) => {
+        // for (plotID of plotIDs) {
+            let plotID = Number(id);
             let plotResponse = await fetch(`${voviAPIBase}/transactions/voxelVille?walletAddress=${userAddress}&tokenId=${plotID}`, options).then(res => res.json());
             while (jQuery.isEmptyObject(plotResponse)) {
-                // console.log("retrying Plot API fetch");
+                console.log("plot response is", plotResponse)
+                console.log("retrying Plot API fetch");
                 plotResponse = await fetch(`${voviAPIBase}/transactions/voxelVille?walletAddress=${userAddress}&tokenId=${plotID}`, options).then(res => res.json());
             }
             let avatarResponse = null;
@@ -401,7 +408,8 @@ const getStakeRequests = async (plotIDs) => {
             let proposedAvatarToStake = proposedStakedPlotsToAvatars.get(plotID);
             if (proposedAvatarToStake) {
                 while (jQuery.isEmptyObject(avatarResponse)) {
-                    // console.log("retrying avatar API fetch");
+                    console.log("avatar response is", avatarResponse)
+                    console.log("retrying avatar API fetch");
                     avatarResponse = await fetch(`${voviAPIBase}/transactions/voxelVilleAvatars?walletAddress=${userAddress}&tokenId=${proposedAvatarToStake}`, options).then(res => res.json());
                 }
                 avatarID = avatarResponse["tokenId"];
@@ -411,7 +419,8 @@ const getStakeRequests = async (plotIDs) => {
             }
             stakeRequests.push([plotResponse["tokenId"], plotResponse["lastTx"], plotResponse["listed"], plotResponse["coupon"],
                 avatarID, avatarTxDate, listedAvatar, avatarCoupon]);
-        }
+        }))
+    }
 
         $("#status-popup").remove();
         $("#block-screen-status").remove();
