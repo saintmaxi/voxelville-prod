@@ -77,7 +77,6 @@ const connect = async () => {
 
 const getAddress = async () => {
     return await signer.getAddress();
-    // return "0x1800cF24f21a8153c38BC6e027ad6012a0CF7366"
 };
 
 const formatEther = (balance_) => {
@@ -584,7 +583,7 @@ const stakeByIds = async () => {
             await displayErrorMessage(`Error: Could not determine last transaction date for avatar!`)
         }
         else if ((error.message).includes("Wallet links do not include sender")) {
-            await displayErrorMessage(`Error: Wallet links do not include sender!`)
+            await displayErrorMessage(`Error: Wallet links do not include sender! Please <span id="wallet-link-opener" onclick="$('#block-screen-error').remove();$('#error-popup').remove();openLinksPrompt();">set a link</span>, then attempt again.`, false);
         }
         else if ((error.message).includes("Cannot confirm wallet linking")) {
             await displayErrorMessage(`Error: Cannot confirm wallet linking!`)

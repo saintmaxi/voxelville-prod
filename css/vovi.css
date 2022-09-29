@@ -204,6 +204,14 @@ h3 {
   width: 90%;
 }
 
+#wallet-link-opener {
+  color: rgb(111, 78, 222) !important;
+}
+
+#wallet-link-opener:hover {
+  cursor: pointer !important;
+}
+
 #available-assets-images,
 #staked-assets-images {
   /* border: solid black .5vw; */
