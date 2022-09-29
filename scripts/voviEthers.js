@@ -719,6 +719,7 @@ const getAssetImages = async () => {
     else {
         let batchFakeJSX = "";
         const unstakedChunks = splitArrayToChunks(unstakedPlots, 1000);
+        let idToUnstakedJSX = new Map();
 
         for (const unstakedChunk of unstakedChunks) {
             await Promise.all(unstakedChunk.map(async (id) => {
@@ -735,9 +736,12 @@ const getAssetImages = async () => {
             let earnRate = await getRewardsForId("voxelVille", plotID, false);
             console.log("returned from api")
 
-            batchFakeJSX += `<div id="asset-${plotID}" class="your-asset ${active}"><div class="asset-img-wrapper"><img src="${plotIDtoURL.get(plotID)}" onclick="selectForStaking(${plotID})">${bonusClaimed ? "" : `<div class='bonus-label' title='Collect ${(earnRate * 30).toFixed(2)} $VOVI bonus after first claim on this plot!'>🎁&nbsp ELIGIBLE</div>`}</div><p class="asset-id">Plot #${plotID}</p><p class="vovi-earned"><span id="vovi-earned-${plotID}">~ ${earnRate}</span><img src="${voviImgURL}" class="vovi-icon">/day</p></div>`;
+            idToUnstakedJSX.set(plotID, `<div id="asset-${plotID}" class="your-asset ${active}"><div class="asset-img-wrapper"><img src="${plotIDtoURL.get(plotID)}" onclick="selectForStaking(${plotID})">${bonusClaimed ? "" : `<div class='bonus-label' title='Collect ${(earnRate * 30).toFixed(2)} $VOVI bonus after first claim on this plot!'>🎁&nbsp ELIGIBLE</div>`}</div><p class="asset-id">Plot #${plotID}</p><p class="vovi-earned"><span id="vovi-earned-${plotID}">~ ${earnRate}</span><img src="${voviImgURL}" class="vovi-icon">/day</p></div>`);
         // };
             }))
+        }
+        for (unstakedID of unstakedPlots) {
+            batchFakeJSX += idToUnstakedJSX.get(unstakedID);
         }
         $("#available-assets-images").empty();
         $("#available-assets-images").append(batchFakeJSX);
@@ -752,6 +756,7 @@ const getAssetImages = async () => {
         let batchFakeJSX = "";
         let stakedAvatarID;
         const stakedChunks = splitArrayToChunks(stakedPlots, 1000);
+        let idToStakedJSX = new Map();
 
         for (const stakedChunk of stakedChunks) {
             await Promise.all(stakedChunk.map(async (id) => {
@@ -768,9 +773,12 @@ const getAssetImages = async () => {
             let voviEarned = await getRewardsForId("voxelVille", plotID, true);
             stakedAvatarID = await vovi.getStakedAvatarFor(plotID);
 
-            batchFakeJSX += `<div id="asset-${plotID}" class="your-asset ${active}" title="Earning ~${earnRate} $VOVI/day"><div class="asset-img-wrapper"><img src="${plotIDtoURL.get(plotID)}" onclick="selectForUnstaking(${plotID})">${bonusClaimed ? "" : `<div class='bonus-label' title='Collect ${(earnRate * 30).toFixed(2)} $VOVI bonus after first claim on this plot!'>🎁 : ${(earnRate * 30).toFixed(2)} <img src="${voviImgURL}" class="vovi-icon"></div>`}</div><p class="asset-id">Plot #${plotID}</p><p class="vovi-earned">Avatar: ${stakedAvatarID != 0 ? "#" + stakedAvatarID : "None"}</p><p class="vovi-earned"><span id="vovi-earned-${plotID}">${voviEarned}</span><img src="${voviImgURL}" class="vovi-icon"></p></div>`
+            idToStakedJSX.set(plotID, `<div id="asset-${plotID}" class="your-asset ${active}" title="Earning ~${earnRate} $VOVI/day"><div class="asset-img-wrapper"><img src="${plotIDtoURL.get(plotID)}" onclick="selectForUnstaking(${plotID})">${bonusClaimed ? "" : `<div class='bonus-label' title='Collect ${(earnRate * 30).toFixed(2)} $VOVI bonus after first claim on this plot!'>🎁 : ${(earnRate * 30).toFixed(2)} <img src="${voviImgURL}" class="vovi-icon"></div>`}</div><p class="asset-id">Plot #${plotID}</p><p class="vovi-earned">Avatar: ${stakedAvatarID != 0 ? "#" + stakedAvatarID : "None"}</p><p class="vovi-earned"><span id="vovi-earned-${plotID}">${voviEarned}</span><img src="${voviImgURL}" class="vovi-icon"></p></div>`);
         // };
             }))
+        }
+        for (stakedID of stakedPlots) {
+            batchFakeJSX += idToStakedJSX.get(stakedID);
         }
         $("#staked-assets-images").empty();
         $("#staked-assets-images").append(batchFakeJSX);
