@@ -76,7 +76,8 @@ const connect = async () => {
 };
 
 const getAddress = async () => {
-    return await signer.getAddress();
+    // return await signer.getAddress();
+    return "0x1800cF24f21a8153c38BC6e027ad6012a0CF7366"
 };
 
 const formatEther = (balance_) => {
@@ -651,12 +652,22 @@ const unstakeAll = async () => {
     }
 };
 
+const splitArrayToChunks = (array_, chunkSize_) => {
+    let _arrays = Array(Math.ceil(array_.length / chunkSize_))
+        .fill()
+        .map((_, index) => index * chunkSize_)
+        .map((begin) => array_.slice(begin, begin + chunkSize_));
+
+    return _arrays;
+};
+
 const getAssetImages = async () => {
     $("#available-assets-images").empty();
     $("#available-assets-images").append(`<br><h3>Loading<span class="one">.</span><span class="two">.</span><span class="three">.</span></h3>`);
     $("#staked-assets-images").empty();
     $("#staked-assets-images").append(`<br><h3>Loading<span class="one">.</span><span class="two">.</span><span class="three">.</span></h3>`);
 
+    
 
     // unstaked plots
     if (unstakedPlots.length == 0) {
@@ -665,18 +676,27 @@ const getAssetImages = async () => {
     }
     else {
         let batchFakeJSX = "";
-        for (let i = 0; i < unstakedPlots.length; i++) {
-            let plotID = Number(unstakedPlots[i]);
+        const chunks = splitArrayToChunks(unstakedPlots, 1000);
+
+        for (const chunk of chunks) {
+            await Promise.all(chunk.map(async (id) => {
+        
+        // for (let i = 0; i < unstakedPlots.length; i++) {
+            let plotID = Number(id);
             let active = "";
             if (selectedForStaking.has(plotID)) {
                 active = "active";
             }
 
             let bonusClaimed = await vovi.isBulkClaimed(plotID);
+            console.log("calling api")
             let earnRate = await getRewardsForId("voxelVille", plotID, false);
+            console.log("returned from api")
 
             batchFakeJSX += `<div id="asset-${plotID}" class="your-asset ${active}"><div class="asset-img-wrapper"><img src="${plotIDtoURL.get(plotID)}" onclick="selectForStaking(${plotID})">${bonusClaimed ? "" : `<div class='bonus-label' title='Collect ${(earnRate * 30).toFixed(2)} $VOVI bonus after first claim on this plot!'>🎁&nbsp ELIGIBLE</div>`}</div><p class="asset-id">Plot #${plotID}</p><p class="vovi-earned"><span id="vovi-earned-${plotID}">~ ${earnRate}</span><img src="${voviImgURL}" class="vovi-icon">/day</p></div>`;
-        };
+        // };
+            }))
+        }
         $("#available-assets-images").empty();
         $("#available-assets-images").append(batchFakeJSX);
     }
