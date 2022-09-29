@@ -173,6 +173,19 @@ const getAllPlotsOwned = async () => {
             plotIDtoURL.set(id, asset["image_url"]);
             collectionsOwned.add(asset["traits"][0]["value"])
         }
+        while (response["next"] != undefined) {
+            response = await fetch(`${openseaAPIBase}?owner=${wallet}&order_direction=desc&asset_contract_addresses=${voxelVilleAddress}&limit=50&include_orders=false&cursor=${response["next"]}`, options).then(res => res.json());
+            while (response["assets"] == undefined) {
+                await sleep(REQUEST_SLEEP)
+                response = await fetch(`${openseaAPIBase}?owner=${wallet}&order_direction=desc&asset_contract_addresses=${voxelVilleAddress}&limit=50&include_orders=false&cursor=${response["next"]}`, options).then(res => res.json());
+            }
+            for (let asset of response["assets"]) {
+                let id = Number(asset["token_id"])
+                ownedPlotIDs.push(id);
+                plotIDtoURL.set(id, asset["image_url"]);
+                collectionsOwned.add(asset["traits"][0]["value"])
+            }
+        }
     }
 
     if (collectorsOnly) {
@@ -231,6 +244,18 @@ const getAllAvatarsOwned = async () => {
             let id = Number(asset["token_id"])
             ownedAvatarIDs.push(id);
             avatarIDtoURL.set(id, asset["image_url"])
+        }
+        while (response["next"] != undefined) {
+            response = await fetch(`${openseaAPIBase}?owner=${wallet}&order_direction=desc&asset_contract_addresses=${voxelVilleAvatarsAddress}&limit=50&include_orders=false&cursor=${response["next"]}`, options).then(res => res.json());
+            while (response["assets"] == undefined) {
+                await sleep(REQUEST_SLEEP)
+                response = await fetch(`${openseaAPIBase}?owner=${wallet}&order_direction=desc&asset_contract_addresses=${voxelVilleAvatarsAddress}&limit=50&include_orders=false&cursor=${response["next"]}`, options).then(res => res.json());
+            }
+            for (let asset of response["assets"]) {
+                let id = Number(asset["token_id"])
+                ownedAvatarIDs.push(id);
+                avatarIDtoURL.set(id, asset["image_url"]);
+            }
         }
     }
 
