@@ -55,12 +55,6 @@ const voviImgURL = "images/coin.png";
 
 /*********************************END CONFIG************************************/
 
-if (window.ethereum == undefined) {
-    displayErrorMessage('Use a web3 enabled browser to stake!');
-    $("#available-assets-images").empty();
-    $("#available-assets-images").append("<br><h3>No tokens available...</h3>");
-}
-
 const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
 const signer = provider.getSigner();
 const voxelVille = new ethers.Contract(voxelVilleAddress, voxelVilleAbi(), signer);
