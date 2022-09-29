@@ -76,8 +76,8 @@ const connect = async () => {
 };
 
 const getAddress = async () => {
-    // return await signer.getAddress();
-    return "0x1800cF24f21a8153c38BC6e027ad6012a0CF7366"
+    return await signer.getAddress();
+    // return "0x1800cF24f21a8153c38BC6e027ad6012a0CF7366"
 };
 
 const formatEther = (balance_) => {
