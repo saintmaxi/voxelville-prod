@@ -933,8 +933,8 @@ async function endLoading(tx, txStatus) {
 
 setInterval(async () => {
     await updateInfo();
-    await updateVoviEarned();
-    await getPendingVoviBalance();
+    // await updateVoviEarned();
+    // await getPendingVoviBalance();
 }, 5000)
 
 
