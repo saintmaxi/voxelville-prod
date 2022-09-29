@@ -283,7 +283,12 @@ const getClaimRequests = async (plotIDs) => {
         await displayStatusMessage(`Generating request<span class="one">.</span><span class="two">.</span><span class="three">.</span></span>`);
         let userAddress = await getAddress();
         let claimRequests = [];
-        for (plotID of plotIDs) {
+
+        const plotChunks = splitArrayToChunks(plotIDs, 1000);
+        for (const plotChunk of plotChunks) {
+            await Promise.all(plotChunk.map(async (id) => {
+
+        // for (plotID of plotIDs) {
             let rewardResponse = await fetch(`${voviAPIBase}/nfts/voxelVille/${plotID}`).then(res => res.json());
             let tokenID = rewardResponse["tokenId"];
             let tokens = rewardResponse["tokens"];
@@ -292,7 +297,8 @@ const getClaimRequests = async (plotIDs) => {
 
             let plotResponse = await fetch(`${voviAPIBase}/transactions/voxelVille?walletAddress=${userAddress}&tokenId=${plotID}`, options).then(res => res.json());
             while (jQuery.isEmptyObject(plotResponse)) {
-                // console.log("retrying Plot API fetch");
+                console.log("returned from plot api:", plotResponse)
+                console.log("retrying Plot API fetch");
                 plotResponse = await fetch(`${voviAPIBase}/transactions/voxelVille?walletAddress=${userAddress}&tokenId=${plotID}`, options).then(res => res.json());
             }
 
@@ -303,7 +309,8 @@ const getClaimRequests = async (plotIDs) => {
             let avatarResponse = await fetch(`${voviAPIBase}/transactions/voxelVilleAvatars?walletAddress=${userAddress}&tokenId=${stakedAvatarID}`, options).then(res => res.json());
             if (stakedAvatarID) {
                 while (jQuery.isEmptyObject(avatarResponse)) {
-                    // console.log("retrying avatar API fetch");
+                    console.log("returned from avatar api:", avatarResponse)
+                    console.log("retrying avatar API fetch");
                     avatarResponse = await fetch(`${voviAPIBase}/transactions/voxelVilleAvatars?walletAddress=${userAddress}&tokenId=${stakedAvatarID}`, options).then(res => res.json());
                 }
                 avatarID = avatarResponse["tokenId"];
@@ -314,7 +321,8 @@ const getClaimRequests = async (plotIDs) => {
 
             claimRequests.push([plotResponse["tokenId"], plotResponse["lastTx"], plotResponse["listed"], reward, plotResponse["coupon"],
                 avatarTxDate, listedAvatar, avatarCoupon]);
-        }
+        }))
+    }
 
         $("#status-popup").remove();
         $("#block-screen-status").remove();
@@ -676,10 +684,10 @@ const getAssetImages = async () => {
     }
     else {
         let batchFakeJSX = "";
-        const chunks = splitArrayToChunks(unstakedPlots, 1000);
+        const unstakedChunks = splitArrayToChunks(unstakedPlots, 1000);
 
-        for (const chunk of chunks) {
-            await Promise.all(chunk.map(async (id) => {
+        for (const unstakedChunk of unstakedChunks) {
+            await Promise.all(unstakedChunk.map(async (id) => {
         
         // for (let i = 0; i < unstakedPlots.length; i++) {
             let plotID = Number(id);
@@ -709,8 +717,13 @@ const getAssetImages = async () => {
     else {
         let batchFakeJSX = "";
         let stakedAvatarID;
-        for (let i = 0; i < stakedPlots.length; i++) {
-            let plotID = stakedPlots[i];
+        const stakedChunks = splitArrayToChunks(stakedPlots, 1000);
+
+        for (const stakedChunk of stakedChunks) {
+            await Promise.all(stakedChunk.map(async (id) => {
+
+        // for (let i = 0; i < stakedPlots.length; i++) {
+            let plotID = Number(id);
             let active = "";
             if (selectedForUnstaking.has(Number(plotID))) {
                 active = "active";
@@ -722,7 +735,9 @@ const getAssetImages = async () => {
             stakedAvatarID = await vovi.getStakedAvatarFor(plotID);
 
             batchFakeJSX += `<div id="asset-${plotID}" class="your-asset ${active}" title="Earning ~${earnRate} $VOVI/day"><div class="asset-img-wrapper"><img src="${plotIDtoURL.get(plotID)}" onclick="selectForUnstaking(${plotID})">${bonusClaimed ? "" : `<div class='bonus-label' title='Collect ${(earnRate * 30).toFixed(2)} $VOVI bonus after first claim on this plot!'>🎁 : ${(earnRate * 30).toFixed(2)} <img src="${voviImgURL}" class="vovi-icon"></div>`}</div><p class="asset-id">Plot #${plotID}</p><p class="vovi-earned">Avatar: ${stakedAvatarID != 0 ? "#" + stakedAvatarID : "None"}</p><p class="vovi-earned"><span id="vovi-earned-${plotID}">${voviEarned}</span><img src="${voviImgURL}" class="vovi-icon"></p></div>`
-        };
+        // };
+            }))
+        }
         $("#staked-assets-images").empty();
         $("#staked-assets-images").append(batchFakeJSX);
     }
