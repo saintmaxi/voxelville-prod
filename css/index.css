@@ -76,6 +76,32 @@ a:hover {
   color: rgb(111, 78, 222) !important;
 }
 
+.refresh-cache {
+  border-radius: 20px;
+  font-family: "Poppins Medium", sans-serif;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-image: linear-gradient(
+    29.14deg,
+    rgb(111, 78, 222) 13.65%,
+    rgb(86, 190, 251) 98.96%
+  );
+  color: black;
+  cursor: pointer;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.refresh-cache svg {
+  display: block;
+  width: 20px;
+  margin-right: 10px;
+}
+
 #socials {
   display: flex;
   flex-direction: row;
@@ -227,6 +253,10 @@ input {
 }
 
 @media screen and (max-width: 991px) {
+  .refresh-cache {
+    display: none;
+  }
+
   select,
   input {
     border: solid black 1px;
