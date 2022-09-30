@@ -555,7 +555,10 @@ const stakeByIds = async () => {
         }
     }
     catch (error) {
-        if ((error.message).includes("This property cannot be staked yet")) {
+        if ((error.message).includes("amount prohibited")) {
+            await displayErrorMessage(`Error: Can only stake max 40 plots in one transaction!`)
+        }
+        else if ((error.message).includes("This property cannot be staked yet")) {
             await displayErrorMessage(`Error: This property cannot be staked yet!`)
         }
         else if ((error.message).includes("sender not owner")) {
@@ -583,7 +586,7 @@ const stakeByIds = async () => {
             await displayErrorMessage(`Error: Could not determine last transaction date for avatar!`)
         }
         else if ((error.message).includes("Wallet links do not include sender")) {
-            await displayErrorMessage(`Error: Wallet links do not include sender! Please <span id="wallet-link-opener" onclick="$('#block-screen-error').remove();$('#error-popup').remove();openLinksPrompt();">set a link</span>, then attempt again.`, false);
+            await displayErrorMessage(`Error: You have not set any wallet links! Please <span id="wallet-link-opener" onclick="$('#block-screen-error').remove();$('#error-popup').remove();openLinksPrompt();">set a link</span>, then attempt again.`, false);
         }
         else if ((error.message).includes("Cannot confirm wallet linking")) {
             await displayErrorMessage(`Error: Cannot confirm wallet linking!`)
@@ -623,7 +626,7 @@ const stakeAll = async () => {
     }
     catch (error) {
         if ((error.message).includes("amount prohibited")) {
-            await displayErrorMessage(`Error: Amount prohibited!`)
+            await displayErrorMessage(`Error: Can only stake max 40 plots in one transaction!`)
         }
         else if ((error.message).includes("Invalid reward coupon received")) {
             await displayErrorMessage(`Error: Invalid reward coupon!`)
