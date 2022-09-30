@@ -359,7 +359,7 @@ const getClaimRequests = async (plotIDs) => {
         $("#status-popup").remove();
         $("#block-screen-status").remove();
         await displayErrorMessage("An error occurred. See console and window alert for details...")
-        window.alert(JSON.parse(error));
+        window.alert(JSON.stringify(error));
         console.log(error);
     }
 }
@@ -455,7 +455,7 @@ const getStakeRequests = async (plotIDs) => {
         $("#status-popup").remove();
         $("#block-screen-status").remove();
         await displayErrorMessage("An error occurred. See console and window alert for details...")
-        window.alert(JSON.parse(error));
+        window.alert(JSON.stringify(error));
         console.log(error);
     }
 }
@@ -599,7 +599,7 @@ const stakeByIds = async () => {
         }
         else {
             await displayErrorMessage("An error occurred. See console and window alert for details...");
-            window.alert(JSON.parse(error));
+            window.alert(JSON.stringify(error));
             console.log(error);
         }
     }
@@ -657,7 +657,7 @@ const stakeAll = async () => {
         }
         else {
             await displayErrorMessage("An error occurred. See console and window alert for details...");
-            window.alert(JSON.parse(error));
+            window.alert(JSON.stringify(error));
             console.log(error);
         }
     }
