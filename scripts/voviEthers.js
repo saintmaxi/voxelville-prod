@@ -167,10 +167,12 @@ const getAllPlotsOwned = async () => {
             response = await fetch(`${openseaAPIBase}?owner=${wallet}&order_direction=desc&asset_contract_addresses=${voxelVilleAddress}&limit=50&include_orders=false`, options).then(res => res.json());
         }
         for (let asset of response["assets"]) {
-            let id = Number(asset["token_id"])
-            ownedPlotIDs.push(id);
-            plotIDtoURL.set(id, asset["image_url"]);
-            collectionsOwned.add(asset["traits"][0]["value"])
+            if (asset["traits"].length > 0) {
+                let id = Number(asset["token_id"])
+                ownedPlotIDs.push(id);
+                plotIDtoURL.set(id, asset["image_url"]);
+                collectionsOwned.add(asset["traits"].find(a => a["trait_type"] === "Location")["value"]);
+            }
         }
         while (response["next"] != undefined) {
             response = await fetch(`${openseaAPIBase}?owner=${wallet}&order_direction=desc&asset_contract_addresses=${voxelVilleAddress}&limit=50&include_orders=false&cursor=${response["next"]}`, options).then(res => res.json());
@@ -179,10 +181,12 @@ const getAllPlotsOwned = async () => {
                 response = await fetch(`${openseaAPIBase}?owner=${wallet}&order_direction=desc&asset_contract_addresses=${voxelVilleAddress}&limit=50&include_orders=false&cursor=${response["next"]}`, options).then(res => res.json());
             }
             for (let asset of response["assets"]) {
-                let id = Number(asset["token_id"])
-                ownedPlotIDs.push(id);
-                plotIDtoURL.set(id, asset["image_url"]);
-                collectionsOwned.add(asset["traits"][0]["value"])
+                if (asset["traits"].length > 0) {
+                    let id = Number(asset["token_id"])
+                    ownedPlotIDs.push(id);
+                    plotIDtoURL.set(id, asset["image_url"]);
+                    collectionsOwned.add(asset["traits"].find(a => a["trait_type"] === "Location")["value"]);
+                }
             }
         }
     }
@@ -734,9 +738,9 @@ const getAssetImages = async () => {
             }
 
             let bonusClaimed = await vovi.isBulkClaimed(plotID);
-            console.log("calling api")
+            // console.log("calling api")
             let earnRate = await getRewardsForId("voxelVille", plotID, false);
-            console.log("returned from api")
+            // console.log("returned from api")
 
             idToUnstakedJSX.set(plotID, `<div id="asset-${plotID}" class="your-asset ${active}"><div class="asset-img-wrapper"><img src="${plotIDtoURL.get(plotID)}" onclick="selectForStaking(${plotID})">${bonusClaimed ? "" : `<div class='bonus-label' title='Collect ${(earnRate * 30).toFixed(2)} $VOVI bonus after first claim on this plot!'>🎁&nbsp ELIGIBLE</div>`}</div><p class="asset-id">Plot #${plotID}</p><p class="vovi-earned"><span id="vovi-earned-${plotID}">~ ${earnRate}</span><img src="${voviImgURL}" class="vovi-icon">/day</p></div>`);
         // };
